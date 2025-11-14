@@ -15,13 +15,13 @@ const handleResponse = async (response: Response) => {
 /**
  * POST /af_admin_login
  * Inicia sesión en el panel de admin.
+ * (Esta función se mantiene igual)
  */
-export const afAdminLogin = async (username: string, password: string): Promise<{ token: string, message?: string }> => {
-  const response = await fetch(`${VITE_API_BASEURL}/af_admin_login`, {
+export const afAdminLogin = async (username: string, password: string): Promise<{ message?: string }> => {
+  const response = await fetch(`${VITE_API_BASEURL}/afiliadores/af_admin_login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    // Asegúrate que tu backend espera 'username' o cámbialo por el campo correcto
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ user:username, password:password }),
   });
   return handleResponse(response);
 };
@@ -29,10 +29,11 @@ export const afAdminLogin = async (username: string, password: string): Promise<
 /**
  * GET /
  * Obtiene la lista de todos los afiliados.
+ * (Token eliminado de los parámetros y headers)
  */
-export const getAfiliadores = async (token: string): Promise<Afiliador[]> => {
+export const getAfiliadores = async (): Promise<Afiliador[]> => {
   const response = await fetch(`${VITE_API_BASEURL}/`, {
-    headers: { 'Authorization': `Bearer ${token}` },
+    // headers: { 'Authorization': `Bearer ${token}` }, // <-- Eliminado
   });
   return handleResponse(response);
 };
@@ -40,11 +41,12 @@ export const getAfiliadores = async (token: string): Promise<Afiliador[]> => {
 /**
  * POST /toggleActivo/:id
  * Activa o desactiva un afiliador.
+ * (Token eliminado de los parámetros y headers)
  */
-export const toggleAfiliadorActivo = async (id: string | number, token: string): Promise<any> => {
+export const toggleAfiliadorActivo = async (id: string | number): Promise<any> => {
   const response = await fetch(`${VITE_API_BASEURL}/toggleActivo/${id}`, {
     method: 'POST',
-    headers: { 'Authorization': `Bearer ${token}` },
+    // headers: { 'Authorization': `Bearer ${token}` }, // <-- Eliminado
   });
   return handleResponse(response);
 };
@@ -52,11 +54,12 @@ export const toggleAfiliadorActivo = async (id: string | number, token: string):
 /**
  * DELETE /delete/:id
  * Elimina un afiliador.
+ * (Token eliminado de los parámetros y headers)
  */
-export const deleteAfiliador = async (id: string | number, token: string): Promise<any> => {
+export const deleteAfiliador = async (id: string | number): Promise<any> => {
   const response = await fetch(`${VITE_API_BASEURL}/delete/${id}`, {
     method: 'DELETE',
-    headers: { 'Authorization': `Bearer ${token}` },
+    // headers: { 'Authorization': `Bearer ${token}` }, // <-- Eliminado
   });
   return handleResponse(response);
 };

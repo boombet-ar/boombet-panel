@@ -15,19 +15,25 @@ export default function LoginPage() {
     setError(null);
 
     try {
-      const data = await afAdminLogin(username, password);
-      
-      if (data.token) {
-        login(data.token);
-      } else {
-        setError(data.message || 'Error en el inicio de sesión.');
-      }
+      const data = await afAdminLogin(username, password);
+      
+      // 👇 ¡ESTA ES LA LÍNEA QUE CAMBIAMOS!
+      if (data.message === 'Ingreso exitoso') { 
+        login("true"); // Usamos un valor "true" para autenticar
+      } else {
+        // Esto ahora solo se ejecutará si el mensaje no es "Ingreso exitoso"
+        setError(data.message || 'Error en el inicio de sesión.');
+      }
+//...
     } catch (err: any) {
       setError(err.message || 'No se pudo conectar al servidor. Inténtalo más tarde.');
     } finally {
       setIsLoading(false);
     }
   };
+
+
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-boombet-dark-900 text-white">

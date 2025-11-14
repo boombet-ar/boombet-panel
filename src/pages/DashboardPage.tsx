@@ -8,7 +8,8 @@ import Modal from '../components/ui/Modal';
 import { N8N_FORM_URL } from '../config';
 
 export default function DashboardPage() {
-  const { token, logout } = useAuth();
+  // Ya no necesitamos 'token' aquí, solo 'logout'
+  const { logout } = useAuth(); 
   const [afiliados, setAfiliados] = useState<Afiliador[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -18,15 +19,12 @@ export default function DashboardPage() {
   // Cargar datos al montar el componente
   useEffect(() => {
     const loadData = async () => {
-      if (!token) {
-        setError("Token no encontrado, por favor inicia sesión de nuevo.");
-        setLoading(false);
-        return;
-      }
+      // Ya no es necesaria la comprobación del token
       try {
         setLoading(true);
         setError(null);
-        const data = await getAfiliadores(token);
+        // Llamamos a la función sin el token
+        const data = await getAfiliadores(); 
         setAfiliados(data);
       } catch (err: any) {
         setError(err.message || 'Error al cargar los datos.');
@@ -35,22 +33,21 @@ export default function DashboardPage() {
       }
     };
     loadData();
-  }, [token]);
+  }, []); // El array de dependencias ahora está vacío
 
   // Manejador para el Toggle
   const handleToggleActivo = async (id: string | number) => {
-    if (!token) return;
-    
+    // Ya no es necesaria la comprobación del token
     setUpdatingId(id);
     try {
-      await toggleAfiliadorActivo(id, token);
+      // Llamamos a la función sin el token
+      await toggleAfiliadorActivo(id); 
       // Actualiza el estado local para reflejar el cambio
       setAfiliados(prev =>
         prev.map(af => (af.id === id ? { ...af, activo: !af.activo } : af))
       );
     } catch (err) {
       console.error('Error al cambiar estado:', err);
-      // Opcional: revertir el estado o mostrar un error
     } finally {
       setUpdatingId(null);
     }
@@ -58,16 +55,16 @@ export default function DashboardPage() {
 
   // Manejador para Eliminar
   const handleDelete = async (id: string | number) => {
-    if (!token) return;
+    // Ya no es necesaria la comprobación del token
     
-    // Confirmación (se puede reemplazar por un modal custom)
     if (!window.confirm('¿Estás seguro de que deseas eliminar este afiliador? Esta acción no se puede deshacer.')) {
       return;
     }
     
     setUpdatingId(id);
     try {
-      await deleteAfiliador(id, token);
+      // Llamamos a la función sin el token
+      await deleteAfiliador(id); 
       // Elimina del estado local
       setAfiliados(prev => prev.filter(af => af.id !== id));
     } catch (err) {

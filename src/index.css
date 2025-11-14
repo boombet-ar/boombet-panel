@@ -1,1 +1,8 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Establece el fondo oscuro y el color de texto por defecto */
+body {
+  @apply bg-boombet-dark-900 text-gray-200;
+}
