@@ -32,7 +32,7 @@ export const afAdminLogin = async (username: string, password: string): Promise<
  * (Token eliminado de los parámetros y headers)
  */
 export const getAfiliadores = async (): Promise<Afiliador[]> => {
-  const response = await fetch(`${VITE_API_BASEURL}/`, {
+  const response = await fetch(`${VITE_API_BASEURL}/afiliadores`, {
     // headers: { 'Authorization': `Bearer ${token}` }, // <-- Eliminado
   });
   return handleResponse(response);
@@ -44,7 +44,7 @@ export const getAfiliadores = async (): Promise<Afiliador[]> => {
  * (Token eliminado de los parámetros y headers)
  */
 export const toggleAfiliadorActivo = async (id: string | number): Promise<any> => {
-  const response = await fetch(`${VITE_API_BASEURL}/toggleActivo/${id}`, {
+  const response = await fetch(`${VITE_API_BASEURL}/afiliadores/toggleActivo/${id}`, {
     method: 'POST',
     // headers: { 'Authorization': `Bearer ${token}` }, // <-- Eliminado
   });
@@ -57,7 +57,7 @@ export const toggleAfiliadorActivo = async (id: string | number): Promise<any> =
  * (Token eliminado de los parámetros y headers)
  */
 export const deleteAfiliador = async (id: string | number): Promise<any> => {
-  const response = await fetch(`${VITE_API_BASEURL}/delete/${id}`, {
+  const response = await fetch(`${VITE_API_BASEURL}/afiliadores/delete/${id}`, {
     method: 'DELETE',
     // headers: { 'Authorization': `Bearer ${token}` }, // <-- Eliminado
   });

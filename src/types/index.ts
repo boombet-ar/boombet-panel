@@ -1,9 +1,8 @@
 export type Afiliador = {
   id: string | number;
-  nombreCompleto: string;
-  token: string;
-  afiliaciones: number;
-  email: string;
+  nombre_completo: string;     
+  token_afiliador: string;     
+  cant_afiliaciones: number;
   dni: string;
   telefono: string;
   activo: boolean;

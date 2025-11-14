@@ -42,9 +42,11 @@ const AfiliadosTable: React.FC<AfiliadosTableProps> = ({ afiliados, onToggle, on
             afiliados.map((af) => (
               <tr key={af.id} className="hover:bg-boombet-dark-700 transition-colors">
                 <td className="px-6 py-4 text-sm text-gray-200 whitespace-nowrap">{af.id}</td>
-                <td className="px-6 py-4 text-sm font-medium text-white whitespace-nowrap">{af.nombreCompleto}</td>
-                <td className="px-6 py-4 text-sm text-gray-300 whitespace-nowrap">{af.token}</td>
-                <td className="px-6 py-4 text-sm text-gray-300 whitespace-nowrap">{af.afiliaciones}</td>
+                {/* 👇 Propiedades corregidas aquí 👇 */}
+                <td className="px-6 py-4 text-sm font-medium text-white whitespace-nowrap">{af.nombre_completo}</td>
+                <td className="px-6 py-4 text-sm text-gray-300 whitespace-nowrap">{af.token_afiliador}</td>
+                <td className="px-6 py-4 text-sm text-gray-300 whitespace-nowrap">{af.cant_afiliaciones}</td>
+                {/* 👆 Propiedades corregidas aquí 👆 */}
                 <td className="px-6 py-4 text-sm text-gray-300 whitespace-nowrap">{af.email}</td>
                 <td className="px-6 py-4 text-sm text-gray-300 whitespace-nowrap">{af.dni}</td>
                 <td className="px-6 py-4 text-sm text-gray-300 whitespace-nowrap">{af.telefono}</td>
